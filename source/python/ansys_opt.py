@@ -20,6 +20,8 @@ import numpy as np
 from scipy.optimize import minimize
 
 
+stress_ratio = 3.0
+
 def create_from_template(template_filename, output_filename, keyword_values):
     """
     Create a new file by replacing keywords in a given template file
@@ -116,7 +118,3 @@ def optimize():
             )
     return res
         
-print optimize()
-
-
-
