@@ -39,3 +39,9 @@ app = guidata.qapplication()
 inputs = MainWindow()
 inputs.show()
 app.exec_()
+
+txt = """
+%Velocity \S
+%orosity 
+
+"""
