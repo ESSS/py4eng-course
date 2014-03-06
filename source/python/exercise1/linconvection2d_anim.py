@@ -39,20 +39,19 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D    ##New Library required for projected 3d plots
 import matplotlib.animation as animation
+from mpl_toolkits.mplot3d import Axes3D
 
 ###variable declarations
 nx = 81
 ny = 81
 c = 1
-sigma = .2
+dt = 5e-3
 
 
 def solve(nt):
     dx = 2.0/(nx-1)
     dy = 2.0/(ny-1)
-    dt = sigma*dx
 
     x = np.linspace(0,2,nx)
     y = np.linspace(0,2,ny)
@@ -72,22 +71,22 @@ def solve(nt):
         u[:,-1] = 1
     return x, y, u
 
-
-
-
-fig = plt.figure(figsize=(11,7), dpi=100)
-
+    
 def update_mesh(t):
-    fig.clear()
+    global surf2
+    x, y, u = solve(t * 3)
+    surf2.remove()
+    surf2 = ax.plot_surface(X,Y,u[:])
+
+if __name__ == "__main__":
+    fig = plt.figure(figsize=(11,7), dpi=100)
     ax = fig.gca(projection='3d')
     ax.set_zlim3d(1.0, 2.0)
-    x, y, u = solve(t * 3)
+    x, y, u = solve(0)
     X, Y = np.meshgrid(x,y)
-    surf2 = ax.plot_surface(X,Y,u[:])
-        
-line_ani = animation.FuncAnimation(fig, update_mesh, 50, interval=10, blit=False)        
-
-plt.show()
+    surf2 = ax.plot_surface(X,Y,u)
+    line_ani = animation.FuncAnimation(fig, update_mesh, 50, interval=10, blit=False)        
+    plt.show()
 
 
 

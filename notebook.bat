@@ -1,1 +1,1 @@
-ipython notebook docs --pylab inline
+ipython notebook notebooks --pylab inline

@@ -66,30 +66,32 @@ def solve(nt):
     for n in range(nt+1): ##loop across number of time steps
         un[:] = u[:]
         u[1:,1:]=un[1:,1:]-(c*dt/dx*(un[1:,1:]-un[0:-1,1:]))-(c*dt/dy*(un[1:,1:]-un[1:,0:-1]))
-        u[0,:] = 1
-        u[-1,:] = 1
-        u[:,0] = 1
-        u[:,-1] = 1
     return x, y, u
     
+surf = None
 
-def update_mesh(t):
+def plot_surface(x, y, u, animate=False):
     global surf
-    x, y, u = solve(t * 3)
-    surf.remove()
-    surf = ax.plot_surface(X,Y,u[:])
-
-
-
-if __name__ == "__main__":
-    fig = plt.figure(figsize=(11,7), dpi=100)  ##the figsize parameter can be used to produce different sized images
+    ##the figsize parameter can be used to produce different sized images
+    fig = plt.figure(figsize=(11,7), dpi=100)  
     ax = fig.gca(projection='3d')
-    x, y, u = solve(0)
     X, Y = np.meshgrid(x,y)
     surf = ax.plot_surface(X,Y,u)
-    ax.set_zlim3d(1.0, 2.0)
-    line_anim = animation.FuncAnimation(fig, update_mesh, 100, interval=10, blit=False)        
-    plt.show()   
+    ax.set_zlim3d(1.0, 2.0)    
+
+    def update_mesh(t, ax):
+        global surf
+        x, y, u = solve(t * 3)
+        surf.remove()
+        surf = ax.plot_surface(X,Y,u[:])
+    
+    if animate:
+        line = animation.FuncAnimation(fig, update_mesh, 100, fargs=(ax,), interval=10)        
+    plt.show()
+
+if __name__ == "__main__":
+    x, y, u = solve(0)
+    plot_surface(x, y, u, True)
 
 
 

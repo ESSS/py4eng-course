@@ -6,13 +6,15 @@ This temporary script file is located here:
 C:\WinPython-32bit-2.7.6.2\settings\.spyder2\.temp.py
 
 """
-
 import os
+import re
+import subprocess
+from scipy.optimize import minimize
+from string import Template
+
 
 os.chdir("C:\py4eng")
 
-
-from string import Template
 
 def create_from_template(template_filename, output_filename, keyword_values):
     """
@@ -34,9 +36,6 @@ def create_from_template(template_filename, output_filename, keyword_values):
         output_file.close()
 
 
-import subprocess
-
-
 def run_ansys(input_filename, output_filename):
     job_name = "vm3-optimz"
     cmd_params = [
@@ -53,7 +52,6 @@ def run_ansys(input_filename, output_filename):
     ]
     subprocess.call(cmd_params)
     
-import re
 
 def read_results(output_filename):
     output_file = open(output_filename)
@@ -68,6 +66,8 @@ def read_results(output_filename):
     return steel_stress, copper_stress
     
 
+target_stress_ratio = 3.0
+
 def evaluate(optvars):
     areas = {}
     print "Cross-sections (Steel | Copper): {0:.3} | {1:.3}".format(*optvars)
@@ -78,13 +78,11 @@ def evaluate(optvars):
     run_ansys("vm3.out.dat", "vm3.out")
     steel_stress, copper_stress = read_results(r"vm3.out")
     print "Stress (Steel | Copper): {0:.3f} | {1:3f}".format(steel_stress, copper_stress)
-    minimize_function = abs(steel_stress/3.0 - copper_stress)
+    minimize_function = abs(steel_stress/target_stress_ratio - copper_stress)
     print "Objective Function: {0:.3f}".format(minimize_function)
     print
     return minimize_function
     
-    
-from scipy.optimize import minimize
     
 def optimize():
     res = minimize(
@@ -100,4 +98,9 @@ def optimize():
     return res
 
 
-optimize()
+if __name__ == "__main__":
+    # call "global" to modify global variables inside a fucntion
+    global target_stress_ratio
+    target_stress_ratio = raw_input("Desired Ratio steel/copper stress: ")
+    result = optimize()
+    print "Results", result

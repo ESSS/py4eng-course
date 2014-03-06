@@ -1,0 +1,199 @@
+
+ ANSYS Multiphysics                                
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *                  ANSYS 14.0 LEGAL NOTICES                   *
+ ***************************************************************
+ *                                                             *
+ * Copyright 2011 SAS IP, Inc.  All rights reserved.           *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2008 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+
+
+          *****  ANSYS COMMAND LINE ARGUMENTS  *****
+  INITIAL JOBNAME              = vm3-optimz                                                                                                                                                                                                                                              
+  BATCH MODE REQUESTED (-b)    = LIST
+  INPUT FILE COPY MODE (-c)    = COPY
+
+ 00303244          VERSION=WINDOWS x64     RELEASE= 14.0     UP20111024
+ CURRENT JOBNAME=vm3-optimz  09:04:40  FEB 26, 2014 CP=      1.061
+
+     1  /COM,ANSYS MEDIA REL. 145 (8/13/2012) REF. VERIF. MANUAL: REL. 145  
+     0  /VERIFY,VM3 
+     0  /PREP7  
+     0  /TITLE, VM3, THERMALLY LOADED SUPPORT STRUCTURE 
+     0  C***      STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 30, PROB. 9  
+     0  ANTYPE,STATIC             ! STATIC ANALYSIS 
+     0  ET,1,LINK180
+     0  SECTYPE,1,LINK  
+     0  SECDATA,0.2 
+     0  SECTYPE,2,LINK  
+     0  SECDATA,0.5 
+     0  MP,EX,1,16E6
+     0  MP,ALPX,1,92E-7 
+     0  MP,EX,2,30E6
+     0  MP,ALPX,2,70E-7 
+     0  TREF,70                   ! REFERENCE TEMPERATURE   
+     0  N,1,-10                   ! DEFINE NODES AND ELEMENTS   
+     0  N,3,10  
+     0  FILL
+     0  N,4,-10,-20 
+     0  N,6,10,-20  
+     0  FILL
+     0  E,1,4   
+     0  E,3,6   
+     0  SECNUM,2
+     0  MAT,2   
+     0  E,2,5   
+     0  CP,1,UY,5,4,6   
+     0  D,1,ALL,,,3               ! BOUNDARY CONDITIONS AND LOADING 
+     0  F,5,FY,-4000
+     0  BFUNIF,TEMP,80            ! UNIFORM TEMPERATURE (TREF+10)   
+     0  FINISH  
+     0  /SOLU   
+     0  OUTPR,BASIC,1   
+     0  OUTPR,NLOAD,1   
+     0  NSUBST,1
+     0  SOLVE   
+     0  FINISH  
+     0  /POST1  
+     0  STEEL_N  = NODE (,,,)   
+     0  COPPER_N = NODE (10,0,0)
+     0  STEEL_E = ENEARN (STEEL_N)  
+     0  COPPER_E = ENEARN (COPPER_N)
+     0  ETABLE,STRS_ST,LS,1 
+     0  ETABLE,STRS_CO,LS,1 
+     0  *GET,STRSS_ST,ELEM,STEEL_E,ETAB,STRS_ST 
+     0  *GET,STRSS_CO,ELEM,COPPER_E,ETAB,STRS_CO
+     0      
+     0  *DIM,LABEL,CHAR,2,2 
+     0  *DIM,VALUE,,2,3 
+     0  LABEL(1,1) = 'STRSS_ST','STRSS_CO'  
+     0  LABEL(1,2) = ' (psi)  ',' (psi)  '  
+     0  *VFILL,VALUE(1,1),DATA,19695,10152  
+     0  *VFILL,VALUE(1,2),DATA,STRSS_ST,STRSS_CO
+     0  *VFILL,VALUE(1,3),DATA,ABS(STRSS_ST/19695 ) ,ABS( STRSS_CO/10152 )  
+     0  /COM
+     0  /OUT,vm3,vrt
+     0  /COM,------------------- VM3 RESULTS ---------------------  
+     0  /COM,   
+     0  *VWRITE,LABEL(1,1),LABEL(1,2),VALUE(1,2)
+     0  (1X,A8,A8,'   ',F14.0)  
+     0  /COM,----------------------------------------------------------------   
+     0  /OUT
+     0      
+     0  FINISH  
+     0  *LIST,vm3,vrt   
+
+ RUN SETUP PROCEDURE FROM FILE= C:\Program Files\ANSYS Inc\v140\ANSYS\apdl\start140.ans
+
+ /INPUT FILE= C:\Program Files\ANSYS Inc\v140\ANSYS\apdl\start140.ans  LINE=       0
+ ANSYS MEDIA REL. 145 (8/13/2012) REF. VERIF. MANUAL: REL. 145
+
+ *** VERIFICATION RUN - CASE VM3                              ***  OPTION=  4
+   *****ANSYS VERIFICATION RUN ONLY*****
+     DO NOT USE RESULTS FOR PRODUCTION
+
+          ***** ANSYS ANALYSIS DEFINITION (PREP7) *****
+
+ TITLE= 
+  VM3, THERMALLY LOADED SUPPORT STRUCTURE                                      
+
+
+ C***      STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 30, PROB. 9
+
+
+
+ PERFORM A STATIC ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+
+ ELEMENT TYPE      1 IS LINK180      3-D SPAR                    
+  KEYOPT( 1- 6)=        0      0      0        0      0      0
+  KEYOPT( 7-12)=        0      0      0        0      0      0
+  KEYOPT(13-18)=        0      0      0        0      0      0
+
+ CURRENT NODAL DOF SET IS  UX    UY    UZ  
+  THREE-DIMENSIONAL MODEL
+
+ *** ERROR ***                           CP =       0.000   TIME= 00:00:00
+ LINK is not a valid section type name for SECID 1.  The SECTYPE         
+ command is ignored.                                                     
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          0
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          1
+
+
+
+ ***** PROBLEM TERMINATED BY INDICATED ERROR(S) OR BY END OF INPUT DATA *****
+
+
+ *---------------------------------------------------------------------------*
+ |                                                                           |
+ |                            ANSYS RUN COMPLETED                            |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |            Release 14.0           UP20111024         WINDOWS x64          |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ | Database Requested(-db)   512 MB    Scratch Memory Requested       512 MB |
+ | Maximum Database Used       1 MB    Maximum Scratch Memory Used      1 MB |
+ |                                                                           |
+ |---------------------------------------------------------------------------|
+ |                                                                           |
+ |        CP Time      (sec) =          1.092       Time  =  09:04:40        |
+ |        Elapsed Time (sec) =          3.000       Date  =  02/26/2014      |
+ |                                                                           |
+ *---------------------------------------------------------------------------*
