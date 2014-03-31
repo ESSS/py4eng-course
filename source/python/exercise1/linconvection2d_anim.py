@@ -65,9 +65,9 @@ def solve(nt):
     for n in range(nt+1): ##loop across number of time steps
         un[:] = u[:]
         u[1:,1:]=un[1:,1:]-(c*dt/dx*(un[1:,1:]-un[0:-1,1:]))-(c*dt/dy*(un[1:,1:]-un[1:,0:-1]))
-        u[0,:] = 1
+        u[0,:]  = 1
         u[-1,:] = 1
-        u[:,0] = 1
+        u[:,0]  = 1
         u[:,-1] = 1
     return x, y, u
 
