@@ -15,15 +15,19 @@ import matplotlib
 matplotlib.use("Qt4Agg")
 from matplotlib.backends import backend_qt4agg
 from matplotlib import pyplot as plot
-import linear_convection_1d
+import linconvection1d
 
 
 class NumericalInput(DataSet):
+    """
+    Numerical Parameters
+    Move Num. Steps slider to update the graphic
+    """
 
     mesh_x_size = IntItem("NX", default=40, min=2, max=401, slider=True)
     wave_speed = FloatItem("Wave Speed", default=1)
     step_size = FloatItem("Step Size", default=5e-3)
-    num_of_steps = IntItem("Num. Steps", default=1, min=1, max=300, slider=True)
+    num_of_steps = IntItem("Num. Steps", default=1, min=1, max=200, slider=True)
     
     
 class MainWindow(QSplitter):
@@ -32,21 +36,21 @@ class MainWindow(QSplitter):
         QSplitter.__init__(self, parent)
         self.setOrientation(Qt.Vertical)
         self.curve = None
+        plot.ioff() # Must call plot.draw to update
+        self.figure = plot.figure()
+        self.plot = self.figure.gca()
+
         # Set "num_of_steps" as a trigger to update the plot
         NumericalInput.num_of_steps.set_prop("display", callback=self.plot_callback)
         self.numerical_input = DataSetEditGroupBox("Numerical", NumericalInput, show_button=False)
         self.addWidget(self.numerical_input)
-
-        plot.ioff() # Must call plot.draw to update
-        self.figure = plot.figure()
-        self.plot = self.figure.gca()
         self.addWidget(self.figure.canvas.manager.window)
         
         
     def plot_callback(self, numerical_input, item, value):
-        linear_convection_1d.c = numerical_input.wave_speed
-        linear_convection_1d.dt = numerical_input.step_size        
-        x, u = linear_convection_1d.solve(value)
+        linconvection1d.c = numerical_input.wave_speed
+        linconvection1d.dt = numerical_input.step_size        
+        x, u = linconvection1d.solve(value)
         self.plot.cla()
         self.plot.plot(x, u)
         plot.draw()
