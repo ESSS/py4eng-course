@@ -1,9 +1,9 @@
 #### Building linconvection1d Application
 
 This is a sample application which solves a linear convection 1D problem in an 
-interactive way (you can change the *Num. Steps* variable and see the results).
+interactive way (you can change the *Num. Steps* parameter and see the results).
 
-The application entry point is the file `main.pyw`. It ends with the `pyw` 
+The application entry point is the file `main.pyw`. It has a `pyw` 
 extension so our executable generator recognize it as a GUI application
 (not a console one).
 
