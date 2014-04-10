@@ -1,20 +1,23 @@
-import sys
-from cx_Freeze import setup, Executable
+"""
+
+  To build an executable for this application, just open a 
+  command prompt and run:
+  
+  > python setup.py build
+  
+  A directory "dist" will be created in the same with all necessary
+  files for distribution.
+
+"""
+from guidata.disthelpers import Distribution
 
 
-# Exclude Tkinter since we are using Qt
-build_exe_options = {"excludes": ["Tkinter"]}
-
-# GUI applications require a different base on Windows (the default is for a
-# console application).
-if sys.platform == "win32":
-    base = "Win32GUI"
-else:
-    base = None
-
-setup(name = "guifoo",
-      version = "0.1",
-      description = "My GUI application!",
-      options = {"build_exe": build_exe_options},
-      executables = [Executable("test.py", base=base)])
-      
+dist = Distribution()
+dist.setup(name="Linear Convection 1D",
+           version='1.0.0',
+           description="",
+           script="main.pyw",
+           target_name="linconvection1d_gui.exe")
+dist.add_modules('guidata')
+dist.add_matplotlib()
+dist.build('cx_Freeze')

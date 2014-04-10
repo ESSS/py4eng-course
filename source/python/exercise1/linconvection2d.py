@@ -41,3 +41,4 @@ def plot_surface(x, y, u):
     ax.plot_surface(X,Y,u)
 
 plot_surface(x, y, u)
+

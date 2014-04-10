@@ -5,7 +5,6 @@ Created on Tue Jan 21 14:54:31 2014
 @author: igor
 """
 
-import guidata
 from guidata.dataset.datatypes import DataSet
 from guidata.dataset.dataitems import FloatItem, IntItem
 from guidata.qt.QtGui import QSplitter
@@ -54,12 +53,3 @@ class MainWindow(QSplitter):
         self.plot.cla()
         self.plot.plot(x, u)
         plot.draw()
-        
-        
-            
-
-if __name__ == "__main__":
-    app = guidata.qapplication()
-    inputs = MainWindow()
-    inputs.show()
-    app.exec_()
