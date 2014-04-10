@@ -1,6 +1,15 @@
-py4eng-course
-=============
+#### Building linconvection1d Application
 
-Curso rápido de Python dirigido a profissionais de CAE
+This is a sample application which solves a linear convection 1D problem in an 
+interactive way (you can change the *Num. Steps* variable and see the results).
 
-Notebooks renderizados disponíveis [aqui](http://nbviewer.ipython.org/github/itghisi/py4eng-course/blob/master/docs/Index.ipynb)
+The application entry point is the file `main.pyw`. It ends with the `pyw` 
+extension so our executable generator recognize it as a GUI application
+(not a console one).
+
+To build an executable from this code, just run
+ 
+    python setup.py build
+
+in this directory. A directory "dist" will be created with all necessary files
+for distribution.
