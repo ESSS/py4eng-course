@@ -7,7 +7,7 @@ Created on Fri Oct 30 12:56:38 2015
 
 import numpy as np
 import matplotlib.pyplot as plot
-from scipy.optimize import curve_fit
+from scipy.optimize import curve_fit, root, fixed_point
 from scipy.integrate import quad
 
 def well_flow(t, qi, ai, n):
@@ -30,10 +30,18 @@ print(params)
 
 plot.plot(t, well_flow(t, *params))
 plot.plot(t, history_data, "ro")
-
-y, _ = quad(well_flow, 0, 24.8, (100, 0.28, 1/2))
-print(y*365)
-
+plot.ylim(0, 100)
 
 plot.show()
 
+objfunc = lambda x: well_flow(x, 100, 0.28, 0.5) - 5
+sol = root(objfunc, 10)
+print(sol.x)
+
+
+sol = fixed_point(well_flow, [5], (100, 0.28, 0.5))
+print(sol)
+
+
+y, _ = quad(well_flow, 0, 24.8, (100, 0.28, 1/2))
+print(y*365)
