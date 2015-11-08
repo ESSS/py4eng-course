@@ -1,0 +1,18 @@
+                  Parameters for KB2D
+                  *******************
+
+START OF PARAMETERS:
+cluster.dat          -file with data
+1   2   4                    -   columns for X, Y, and variable
+-1.0e21   1.0e21             -   trimming limits
+3                            -debugging level: 0,1,2,3
+kb2d.dbg                     -file for debugging output
+kb2d.out                     -file for kriged output
+25    5.0  2.0               -nx,xmn,xsiz
+25    5.0  2.0               -ny,ymn,ysiz
+1    1                       -x and y block discretization
+4    8                       -min and max data for kriging
+20.0                         -maximum search radius
+1    2.302                   -0=SK, 1=OK,  (mean if SK)
+1   2.0                      -nst, nugget effect
+1   8.0  0.0  10.0  10.0     -it, c, azm, a_max, a_min
