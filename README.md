@@ -14,8 +14,8 @@ Chapter 3a - [Regular Expressions]
 
 Chapter 4 - [Building Graphical Applications - the fast and easy way]
 
-[Python Basics]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-en/1.&nbsp;Python&nbsp;Basics.ipynb
-[Decline Curve Analysis]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-oil/2.&nbsp;Decline&nbsp;Curve&nbsp;Analysis.ipynb
-[Files and OS]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-oil/3.&nbsp;Files&nbsp;and&nbsp;OS.ipynb
+[Python Basics]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-en/1.%20Python%20Basics.ipynb
+[Decline Curve Analysis]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-oil/2.%20Decline%20Curve%20Analysis.ipynb
+[Files and OS]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-oil/3.%20Files%20and%20OS.ipynb
 [Regular Expressions]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-en/3c.%20Regular%20Expressions.ipynb
 [Building Graphical Applications - the fast and easy way]: http://nbviewer.ipython.org/github/esss/py4eng-course/blob/master/notebooks/py4eng-en/4.%20Building%20graphical%20applications%20-%20the%20fast%20and%20easy%20way.ipynb
